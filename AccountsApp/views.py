@@ -1,3 +1,5 @@
+
+
 from django.http.request import HttpHeaders
 from django.shortcuts import render, redirect, reverse  
 from django.contrib.auth import login, logout, authenticate
@@ -8,7 +10,7 @@ from RestaurantApp.models import Restaurant, Table
 from BotsApp.models import Bot
 
 # Create your views here.
-
+#
 
 # LOGIN VIEW..................................................................
 def LoginView(request):
