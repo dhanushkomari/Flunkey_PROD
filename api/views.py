@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from RestaurantApp.models import Delivery, Table
+from RestaurantApp.models import Delivery, Table, Vist
 from AccountsApp.models import CustomUser as User
 from BotsApp.models import Bot
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
-
+import time
 # Create your views here.
 
 #... All Deliveries  ....................
@@ -70,3 +70,27 @@ def RestLatestView(request, username):
     serializer = DeliverySerializer(d, many = False)
     return Response(serializer.data)
 
+
+def vist(request):
+    try:
+        a = Vist.objects.latest('pk')        
+        b = a.mob_no
+        c = a.active
+    except:
+        a = Vist.objects.create(mob_no = 0, active = True)
+        b = a.mob_no
+        c = a.active
+        a.save()
+
+    time.sleep(b)
+    return c
+
+@api_view(['POST'])
+def Endtoday(request, user):
+    v = Vist.objects.latest('pk')
+    serializer = VistSerializer(instance = v, data = request.POST)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.data)

@@ -69,6 +69,9 @@ class TempDelivery(models.Model):
 
     def __str__(self):
         return (str(self.id))
+class Vist(models.Model):
+    mob_no = models.IntegerField()
+    active = models.BooleanField(default = True)
 #.........................................................................................
 
 

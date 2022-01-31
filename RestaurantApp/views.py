@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from RestaurantApp.models import Delivery, Restaurant, Table, TempDelivery
 import time
+from api.views import vist
 # Create your views here.
 
 
@@ -37,7 +38,13 @@ def ConfirmDetailsVIew(request):
     t = TempDelivery.objects.filter(restaurant = request.user.rest.rest_name).latest('pk')
 
     if request.method == "POST":
-        FD = Delivery.objects.create(
+        try:
+            res = vist(request)  
+        except Exception as e:
+            res = False
+
+        if res == True:
+            FD = Delivery.objects.create(
                                        username = t.username,
                                        restaurant = t.restaurant,
                                        bot_id = t.bot_id,
@@ -48,8 +55,10 @@ def ConfirmDetailsVIew(request):
                                        ip = t.ip,
                                        time = time.time()
                                     )
-        FD.save()
-        t.delete()
+            FD.save()
+            t.delete()
+        else:
+            pass
         return redirect('RestaurantApp:delivery-details')
     return render(request, 'RestaurantApp/confirm_delivery.html' ,{'t':t})
 #..................................................................................................

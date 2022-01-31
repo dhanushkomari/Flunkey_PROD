@@ -1,4 +1,4 @@
-from RestaurantApp.models import Delivery, Table
+from RestaurantApp.models import Delivery, Table, Vist
 from BotsApp.models import Bot
 from rest_framework import serializers
 
@@ -26,6 +26,11 @@ class BotBatterySerializer(serializers.ModelSerializer):
     class Meta:
         model = Bot
         fields = ('battery',)
+
+class VistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vist
+        fields = '__all__'
 #..............................................................
 
 #... Table Serializers ........................................

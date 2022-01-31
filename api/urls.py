@@ -9,5 +9,6 @@ urlpatterns = [
     path('bot-battery/<str:id>', views.BotBatteryView, name = 'bot-battery'),
     path('table-status/<str:id>', views.TableStatusView, name = 'table-status'),    
     path('delivery-status/<str:id>', views.DeliveryStatusView, name = 'delivery-status'),
-    path('<str:username>/latest', views.RestLatestView, name = 'rest-latest')
+    path('<str:username>/latest', views.RestLatestView, name = 'rest-latest'),
+    path('<str:user>/end-today', views.Endtoday, name = 'end-today')
 ]
